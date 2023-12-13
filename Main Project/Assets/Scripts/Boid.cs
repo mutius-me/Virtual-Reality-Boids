@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boid : MonoBehaviour {
@@ -118,4 +120,10 @@ public class Boid : MonoBehaviour {
         return Vector3.ClampMagnitude (v, settings.maxSteerForce);
     }
 
+
+    private void Start()
+    {
+        // add self to OSC manager transform list
+        if (OSCManager.Instance != null) OSCManager.Instance.boidTransforms.Add(transform);
+    }
 }
