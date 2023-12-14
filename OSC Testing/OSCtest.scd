@@ -2,24 +2,26 @@
 
 // Start the OSC server on port 57120
 // s.addr = NetAddr("127.0.0.1", 57120);
-s.reboot;
+// s.reboot;
 
 
 s.waitForBoot {
 
 	// Define an OSCdef for the /ball/position address pattern
 	// This will trigger every time a message is received at that address
-	OSCdef(\ballPosition, { |msg, time, addr, recvPort|
+	OSCdef(\boidsDistances, { |msg, time, addr, recvPort|
 		var distances, positions;
 
 		// The message arguments (the ball's position) start at index 1 of the msg array
-		distances = msg[1];
+		distances = msg;
 
-		positions = msg[2];
+		// positions = msg[2];
+
+		distances[0].postln;
 
 		// Post the position to the Post window for debugging
-		positions.postln;
-	}, '/boids/data');
+		// distances.postln;
+	}, '/boids/distances');
 
 })
 
