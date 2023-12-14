@@ -41,7 +41,7 @@ By Leonardo von Mutius & Neil Sachdeva.
 */
 (
 // s.addr;
-// s.addr = NetAddr("127.0.0.1", 57120);
+// s.addr = NetAddr("127.0.0.1", 57110);
 
 SynthDef(\harmonicSynthSine, { |out = 0, freq = 440, baseAmp = 0.1, ampMod = 1, panPos = 0, filterCutoff = 500|
     var signal, ampEnv, panned, filtered;
@@ -67,7 +67,7 @@ SynthDef(\harmonicSynthSine, { |out = 0, freq = 440, baseAmp = 0.1, ampMod = 1, 
 
     // Output
     Out.ar(out, filtered);
-});
+}).add;
 
 SynthDef(\harmonicSynthTri, { |out = 0, freq = 440, baseAmp = 0.1, ampMod = 1, panPos = 0, filterCutoff = 500|
     var signal, ampEnv, panned, filtered;
@@ -93,7 +93,6 @@ SynthDef(\harmonicSynthTri, { |out = 0, freq = 440, baseAmp = 0.1, ampMod = 1, p
     // Output
     Out.ar(out, filtered);
 }).add;
-
 
 /*
 
@@ -179,26 +178,29 @@ f = { |freq, x|
 */
 
 
+ ~updateAllSynths = Routine({
+	2.wait;
+	inf.do {
+ 		~boidCount.do { |boidIndex|
+ 			var boidData = ~boids[boidIndex];
+ 			if(boidData.notNil) {
+ 				~updateSynth.value(boidIndex, boidData[0], boidData[1], boidData[2], boidData[3]);
+ 			};
+ 		};
+ 		(0.5).wait;  // Wait for 1 beat before the next iteration
+ 	};
+ });
+
+
 // ~updateAllSynths = Routine({
 // 	inf.do {
-// 		~boidCount.do { |boidIndex|
-// 			var boidData = ~boids[boidIndex];
-// 			if(boidData.notNil) {
-// 				~updateSynth.value(boidIndex, boidData[0], boidData[1], boidData[2], boidData[3]);
-// 			};
-// 		};
-// 		(0.5).wait;  // Wait for 1 beat before the next iteration
+// 		var boidData = ~boids[0];
+// 		boidData.postln;
+// 		~updateSynth.value(0, boidData[0], boidData[1], boidData[2], boidData[3]);
+//
+// 		0.5.wait;
 // 	};
 // });
-
-
-~updateAllSynths = Routine({
-	inf.do {
-		var boidData = ~boids[0];
-		boidData.postln;
-	0.5.wait;
-	};
-});
 
 
 ~updateAllSynths.play(~updateClock);
@@ -219,7 +221,7 @@ f = { |freq, x|
 		// "sugma".postln;
 		synth.set(
 			// \?, distance,
-			\few, posY,
+			\ampMod, posY,
 			\panPos, posX,
 			\filterCutoff, posZ
 		);
@@ -512,6 +514,17 @@ OSCdef(\positionReceiver23, { |msg|
     ~boids[boidIndex][2] = posY;
     ~boids[boidIndex][3] = posZ;
 }, '/boids/positions/23');
+
+OSCdef(\positionReceiver24, { |msg|
+    var boidIndex, posX, posY, posZ;
+    boidIndex = msg[1];
+    posX = msg[2];
+    posY = msg[3];
+    posZ = msg[4];
+    ~boids[boidIndex][1] = posX;
+    ~boids[boidIndex][2] = posY;
+    ~boids[boidIndex][3] = posZ;
+}, '/boids/positions/24');
 
 )
 
