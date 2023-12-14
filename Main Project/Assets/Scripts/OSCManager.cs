@@ -53,8 +53,14 @@ public class OSCManager : MonoBehaviour
             Vector3 boidPos = boidTransforms[i].position;
             _distances[i] = Vector3.Distance(camTransform.position, boidPos);
             _positions[i] = boidPos;
+            _client.Send("/boids/distances/" + i.ToString(), i, (int)_distances[i]);
+            _client.Send("/boids/positions/" + i.ToString(), i, (int)_positions[i].x, (int)_positions[i].y, (int)_positions[i].z);
+
         }
-        
-        _client.Send("/boids/data", _distances, _positions);
+
+        //_client.Send("/boids/distances/0", 0, (int)_distances[0]);
+        //_client.Send("/boids/position/0", _positions[0].x);
+
+        Debug.Log((int)_distances[0]);
     }
 }
