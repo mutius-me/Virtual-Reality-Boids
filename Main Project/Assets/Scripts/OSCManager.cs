@@ -35,14 +35,16 @@ public class OSCManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     private void Start()
     {
         _client = GetComponent<uOscClient>();
-
         _distances = new float[_spawner.spawnCount];
         _positions = new Vector3[_spawner.spawnCount];
+        _client.Send("/triggerRoutine/", true);
+
     }
 
     // Update is called once per frame

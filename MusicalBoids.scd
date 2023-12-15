@@ -179,7 +179,6 @@ f = { |freq, x|
 
 
  ~updateAllSynths = Routine({
-	2.wait;
 	inf.do {
  		~boidCount.do { |boidIndex|
  			var boidData = ~boids[boidIndex];
@@ -203,7 +202,7 @@ f = { |freq, x|
 // });
 
 
-~updateAllSynths.play(~updateClock);
+// ~updateAllSynths.play(~updateClock);
 
 
 // Function to update synth parameters based on received data
@@ -247,6 +246,13 @@ OSCdef(\distanceReceiver0, { |msg|
     distance = msg[2];
 	~boids[boidIndex][0] = distance;
 }, '/boids/distances/0');
+
+// Define the OSC listener
+OSCdef(\triggerRoutine, { |msg, time, addr, recvPort|
+    "OSC Message Received".postln;
+	~updateAllSynths.play(~updateClock);
+}, '/triggerRoutine/'); // Listening for OSC messages with address pattern '/triggerRoutine'
+
 
 
 OSCdef(\positionReceiver0, { |msg|
