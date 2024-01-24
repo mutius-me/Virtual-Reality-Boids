@@ -28,7 +28,7 @@ More on Boids:
 
 [http://www.vergenet.net/~conrad/boids/](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbjVfVVM0STJwdVhNakNOb0lDT1NDcE9UMTl0d3xBQ3Jtc0tuTnhKUDV1dG9YRHIwczJST21WWmVudW9jODdtN1pIT1JTRkYwVFJkYUtvOXZ3bTUzZ2dhNGpQTGJsTHpMb1M5aVhqcDg1alBUZlg1NXJIMjA4VGJjQjc5a1ViWUxLdkMxMFVzc2cwdHRFVnJ4R1dtMA&q=http%3A%2F%2Fwww.vergenet.net%2F%7Econrad%2Fboids%2F&v=_d8M3Y-hiUs)
 
-We did not write the C# implementation for the boids themselves, but instead used an existing script found [here](https://github.com/SebLague/Boids/tree/master). This was for a series of reasons:
+We did not write the Unity & C# implementation for the boids themselves, but instead used Sebastian Lague's repository, found [here](https://github.com/SebLague/Boids/tree/master). This was for a series of reasons:
 
 - Programming this behavior turns out to be highly complex and requires very high-level knowledge of Unity. It felt out of scope of the project, as well as out of scope of our programming abilities in Unity (this was our first time developing anything with Unity, VR, and C#).
 - We had other, more pressing technical priorities: 1) Implementing virtual reality using a Meta Quest 2 while integrating two separate platforms (SuperCollider and Unity); 2) implementing objects and scripts in Unity to fetch real-time positional data from the boids, including x, y, z coordinates and distance from the player; 2) routing this information to SuperCollider through OSC with minimal latency; and most importantly, 3) writing the SuperCollider code that would be able to receive data from OSC to create real-time, rule-based music that sounded convincing.
