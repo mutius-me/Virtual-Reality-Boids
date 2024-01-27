@@ -8,7 +8,7 @@ The key themes for this project are **rule-based composition, human-computer int
 
 ## So, what are boids, anyway?
 
-Boids—short for “bird-oid”—are an an **artificial life program** that simulate the flocking behavior of birds. Boid flocking is an example of **emergent behavior**: complexity arises from the interaction between agents that follow a set of simple, clearly-defined rules. (The behavior of critters in John Conway's immortalized classic game, Game of Life, is a great example of emergent behavior.)
+Boids—short for “bird-oid”—are an an **artificial life program** that simulate the flocking behavior of birds. Boid flocking is an example of **emergent behavior**: complexity arises from the interaction between agents that follow a set of simple, clearly-defined rules. (The behavior of critters in John Conway's immortalized classic game, Game of Life, is another great example of emergent behavior.)
 
 Boids must follow three rules (per [Wikipedia](https://en.wikipedia.org/wiki/Boids)):
 
